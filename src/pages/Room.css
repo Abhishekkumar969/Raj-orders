@@ -1,0 +1,231 @@
+/* General Styling */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.menu-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    background: white;
+}
+
+
+/* Header */
+
+.restaurant-title {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.delivery-time {
+    font-size: 14px;
+    color: gray;
+    margin-bottom: 10px;
+}
+
+
+/* Menu List */
+
+.menu-list {
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    padding: 15px 0;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-price {
+    font-weight: bold;
+    color: #333;
+}
+
+.item-desc {
+    font-size: 14px;
+    color: #777;
+    max-width: 80%;
+}
+
+
+/* Quantity Buttons */
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    border: 1px solid #28a745;
+    border-radius: 20px;
+    padding: 5px;
+}
+
+.quantity-controls button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: #28a745;
+    width: 30px;
+    cursor: pointer;
+}
+
+.quantity-controls span {
+    margin: 0 10px;
+    font-size: 16px;
+}
+
+
+/* Cart Footer - Fixed at Bottom, Stylish, Responsive */
+
+.cart-footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #008000;
+    /* Dark Green */
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px -4px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+
+/* Left Side (Item Count Text) */
+
+.cart-footer .cart-info {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+
+/* View Cart Button */
+
+.view-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    color: #008000;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Cart Icon inside Button */
+
+.view-cart i {
+    margin-left: 8px;
+    font-size: 18px;
+}
+
+
+/* Hover Effect */
+
+.view-cart:hover {
+    background: #f1f1f1;
+    transform: scale(1.05);
+}
+
+
+/* Add Button - Aesthetic Green */
+
+.add-button {
+    background: linear-gradient(135deg, #00c853, #009624);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.add-button:hover {
+    background: linear-gradient(135deg, #009624, #007b34);
+    transform: scale(1.05);
+}
+
+
+/* Counter Wrapper */
+
+.counter {
+    display: flex;
+    align-items: center;
+    border-radius: 25px;
+    background: white;
+    border: 2px solid #00c853;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* Counter Buttons */
+
+.counter button {
+    background: #00c853;
+    color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.counter button:hover {
+    background: #009624;
+    transform: scale(1.1);
+}
+
+
+/* Counter Quantity */
+
+.counter span {
+    padding: 0 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+}
+
+.submit-order {
+    background: linear-gradient(135deg, #ff9800, #e65100);
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.submit-order:hover {
+    background: linear-gradient(135deg, #e65100, #bf360c);
+    transform: scale(1.05);
+}

@@ -1,0 +1,299 @@
+/* General */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+body {
+    font-family: "Poppins", sans-serif;
+    background-color: #f8f8f8;
+    margin: 0;
+    padding: 0;
+}
+
+.home-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 70px;
+}
+
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    text-align: center;
+}
+
+.popup-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.popup-table th,
+.popup-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.close-popup {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+/* Hero Section */
+
+.hero-section {
+    position: relative;
+    width: 100%;
+}
+
+.hero-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
+
+.overlay {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    color: rgb(255, 255, 255);
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.icon-button {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+
+/* Categories */
+
+.category-section {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.category-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.category-btn {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #000;
+}
+
+.category-btn.active {
+    background-color: #ff9900;
+    color: white;
+    border: none;
+}
+
+.category-btn img {
+    width: 70px;
+    height: 50px;
+    border-radius: 5px;
+}
+
+
+/* Room List - Ensures Two Cards in a Row */
+
+.room-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    /* Two equal columns */
+    gap: 12px;
+    /* Space between cards */
+    width: 90%;
+    max-width: 400px;
+    /* Adjust to maintain design */
+    margin: 20px auto 0;
+}
+
+
+/* Room Card */
+
+.room-card {
+    background: white;
+    border-radius: 15px;
+    padding: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* Room Image */
+
+.room-img {
+    width: 100%;
+    height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+}
+
+.room-details {
+    text-align: left;
+    /* Align text to the left */
+    width: 100%;
+    /* Ensure full width for proper alignment */
+    padding-left: 0px;
+    /* Add padding for better spacing */
+}
+
+.room-details h3 {
+    font-size: 1rem;
+    margin: 5px 0;
+}
+
+.rating {
+    color: #ff9900;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.price {
+    font-weight: bold;
+    color: #ff9900;
+    font-size: 1.2rem;
+}
+
+
+/* Bottom Navigation */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: white;
+    padding: 12px 0;
+    display: flex;
+    justify-content: space-around;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+}
+
+.nav-icon {
+    text-align: center;
+    color: gray;
+    font-size: 0.8rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.nav-icon .material-icons {
+    font-size: 28px;
+    color: gray;
+}
+
+.nav-icon.active .material-icons {
+    color: #ff9900;
+}
+
+
+/* Find by Category Section */
+
+.category-section h2 {
+    font-size: 1.2rem;
+    /* Adjust size */
+    font-family: "Poppins", sans-serif;
+    /* ✅ Google Font Applied */
+    font-weight: bold;
+    /* Make it bold */
+    color: #000000;
+    /* Dark color for readability */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .category-buttons {
+        gap: 20px;
+        /* Adjust gap */
+    }
+    .category-btn {
+        padding: 10px;
+        /* Adjust padding */
+    }
+    .category-btn img {
+        width: 80px;
+        /* Adjust width */
+        height: 60px;
+        /* Adjust height */
+    }
+    .room-list {
+        grid-template-columns: repeat(4, 1fr);
+        /* Three equal columns */
+        max-width: 1000px;
+        /* Adjust to maintain design */
+    }
+    .room-card {
+        max-width: 300px;
+        /* Adjust to maintain design */
+    }
+    .room-img {
+        height: 150px;
+        /* Adjust height */
+    }
+    .room-details h3 {
+        font-size: 1.1rem;
+        /* Adjust size */
+    }
+    .price {
+        font-size: 1.4rem;
+        /* Adjust size */
+    }
+    .bottom-nav {
+        padding: 12px 0;
+        /* Adjust padding */
+    }
+}
