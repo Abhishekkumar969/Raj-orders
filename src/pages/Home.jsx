@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-// import { Link, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { db } from "../firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { doc, deleteDoc, query, where, getDocs, collection } from "firebase/firestore";
+
 import "./Home.css";
 
 const allRooms = [
@@ -22,45 +22,79 @@ const Home = () => {
     const [rooms, setRooms] = useState(allRooms);
     const [selectedRoomOrders, setSelectedRoomOrders] = useState(null);
 
+    const fetchOrders = async () => {
+        try {
+            const querySnapshot = await getDocs(collection(db, "orders"));
+            const ordersData = {};
+
+            querySnapshot.forEach((doc) => {
+                const order = doc.data();
+                if (ordersData[order.roomNo]) {
+                    ordersData[order.roomNo].push({ ...order, id: doc.id });
+                } else {
+                    ordersData[order.roomNo] = [{ ...order, id: doc.id }];
+                }
+            });
+
+            const updatedRooms = allRooms.map((room) => ({
+                ...room,
+                orders: ordersData[room.id] || [],
+            }));
+
+            setRooms(updatedRooms);
+        } catch (error) {
+            console.error("Error fetching orders:", error);
+        }
+    };
+
     useEffect(() => {
-        const fetchOrders = async () => {
-            try {
-                const querySnapshot = await getDocs(collection(db, "orders"));
-                const ordersData = {};
-
-                querySnapshot.forEach((doc) => {
-                    const order = doc.data();
-                    if (ordersData[order.roomNo]) {
-                        ordersData[order.roomNo].push(order);
-                    } else {
-                        ordersData[order.roomNo] = [order];
-                    }
-                });
-
-                // Update rooms with orders
-                const updatedRooms = allRooms.map((room) => ({
-                    ...room,
-                    orders: ordersData[room.id] || [],
-                }));
-
-                setRooms(updatedRooms);
-            } catch (error) {
-                console.error("Error fetching orders:", error);
-            }
-        };
-
         fetchOrders();
     }, []);
-
 
     const handleViewOrders = (room) => {
         if (!room.orders || room.orders.length === 0) {
             alert(`No orders available for Room ${room.id}.`);
             return;
         }
-
-        setSelectedRoomOrders(room); // Store the room details in state to show the pop-up
+        setSelectedRoomOrders(room);
     };
+
+
+
+    const handleCheckout = async (roomNo) => {
+        try {
+            console.log("Checking out room:", roomNo); // Debugging log
+
+            const ordersRef = collection(db, "orders");
+            const q = query(ordersRef, where("roomNo", "==", String(roomNo))); // 🔥 Ensure roomNo is a string
+
+            const querySnapshot = await getDocs(q);
+            console.log("Orders found for checkout:", querySnapshot.size);
+
+            if (querySnapshot.empty) {
+                alert(`No orders found for Room ${roomNo}.`);
+                return;
+            }
+
+            // Delete all orders for this room
+            const deletePromises = querySnapshot.docs.map((document) => {
+                console.log("Deleting order ID:", document.id);
+                return deleteDoc(doc(db, "orders", document.id));
+            });
+
+            await Promise.all(deletePromises);
+
+            alert(`Orders for Room ${roomNo} have been checked out successfully.`);
+            fetchOrders(); // Refresh UI with updated data
+            setSelectedRoomOrders(null); // Close popup
+        } catch (error) {
+            console.error("Error during checkout:", error);
+            alert("Error checking out. Please try again.");
+        }
+    };
+
+
+
 
 
     const closePopup = () => {
@@ -69,7 +103,6 @@ const Home = () => {
 
     return (
         <div className="home-container">
-            {/* Hero Section */}
             <div className="hero-section">
                 <img src="/assets/1005.jpg" alt="Hotel" className="hero-image" />
                 <div className="overlay">
@@ -78,11 +111,9 @@ const Home = () => {
                 </div>
             </div>
 
-
-            {/* Listings */}
             <div className="room-list">
                 {rooms
-                    .filter(room => room.orders && room.orders.length > 0) // Only show rooms with orders
+                    .filter(room => room.orders && room.orders.length > 0)
                     .map((room) => (
                         <div key={room.id} className="room-card">
                             <img style={{ width: "100%" }} src={room.image} alt={`Room ${room.id}`} className="room-img" />
@@ -97,7 +128,6 @@ const Home = () => {
                 }
             </div>
 
-            {/* Pop-up for Orders */}
             {selectedRoomOrders && (
                 <div className="popup">
                     <div className="popup-content">
@@ -124,38 +154,38 @@ const Home = () => {
                                 )}
                             </tbody>
                         </table>
+                        <h3>Total Amt: ₹{selectedRoomOrders.orders.reduce((total, order) => total + order.items.reduce((sum, item) => sum + item.qty * item.price, 0), 0)}</h3>
                         <button className="close-popup" onClick={closePopup}>
                             Close
+                        </button>
+                        <button className="checkout-button" onClick={() => handleCheckout(selectedRoomOrders.id)}>
+                            Checkout
                         </button>
                     </div>
                 </div>
             )}
-            {/* Bottom Navigation */}
+
             <div className="bottom-nav">
                 <Link
                     to="/allOrders"
                     state={{ orders: rooms.filter(room => room.orders.length > 0) }}
                     className="nav-icon"
                 >
-
                     <span className="material-icons">restaurant</span>
                     <span>All Orders</span>
                 </Link>
-
 
                 <Link to="/" className="nav-icon active">
                     <span className="material-icons">home</span>
                     <span>Home</span>
                 </Link>
 
-                <Link to="menu" className="nav-icon">
+                {/* <Link to="menu" className="nav-icon">
                     <span className="material-icons">restaurant_menu</span>
                     <span>Menu</span>
-                </Link>
-
+                </Link> */}
 
                 <Link to="/bill" className="nav-icon" state={{ orders: rooms.flatMap(room => room.orders) }}>
-
                     <span className="material-icons">receipt</span>
                     <span>Bill</span>
                 </Link>
@@ -163,5 +193,5 @@ const Home = () => {
         </div>
     );
 };
-export default Home;
 
+export default Home;

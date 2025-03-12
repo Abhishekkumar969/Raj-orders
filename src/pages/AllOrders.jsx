@@ -140,8 +140,8 @@ const AllOrders = () => {
                                             <tr style={{ backgroundColor: "#2196F3", color: "white" }}>
                                                 <th style={thTdStyle}>Item</th>
                                                 <th style={thTdStyle}>Qty</th>
-                                                <th style={thTdStyle}>Price</th>
-                                                <th style={thTdStyle}>Total</th>
+                                                {/* <th style={thTdStyle}>Price</th> */}
+                                                {/* <th style={thTdStyle}>Total</th> */}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -150,10 +150,10 @@ const AllOrders = () => {
                                                     <tr key={i} style={{ backgroundColor: i % 2 === 0 ? "#f9f9f9" : "white" }}>
                                                         <td style={thTdStyle}>{item.name}</td>
                                                         <td style={thTdStyle}>{item.qty}</td>
-                                                        <td style={thTdStyle}>₹{item.price}</td>
+                                                        {/* <td style={thTdStyle}>₹{item.price}</td>
                                                         <td style={{ ...thTdStyle, ...totalStyle }}>
                                                             ₹{item.qty * item.price}
-                                                        </td>
+                                                        </td> */}
                                                     </tr>
                                                 ))}
                                         </tbody>

@@ -14,9 +14,8 @@ import Room1007 from "./pages/Room1007";
 import Room1008 from "./pages/Room1008";
 import Room1009 from "./pages/Room1009";
 import Room1010 from "./pages/Room1010";
-import SmallHall from "./pages/SmallHall";
-import BigHall from "./pages/BigHall";
-import Menu from "../src/components/Menu";
+
+// import Menu from "../src/components/Menu";
 
 
 function App() {
@@ -38,9 +37,7 @@ function App() {
         <Route path="/room1008" element={<Room1008 />} /> {/* Bookings Page */}
         <Route path="/room1009" element={<Room1009 />} /> {/* Bookings Page */}
         <Route path="/Room1010" element={<Room1010 />} /> {/* Bookings Page */}
-        <Route path="/SmallHall" element={<SmallHall />} /> {/* Bookings Page */}
-        <Route path="/BigHall" element={<BigHall />} /> {/* Bookings Page */}
-        <Route path="/menu" element={<Menu />} /> {/* Bookings Page */}
+        {/* <Route path="/menu" element={<Menu />} /> Bookings Page */}
       </Routes>
     </Router>
   );
