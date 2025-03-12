@@ -94,10 +94,6 @@ const AllOrders = () => {
         textAlign: "center",
     };
 
-    const totalStyle = {
-        fontWeight: "bold",
-        color: "#27ae60",
-    };
 
     const buttonStyle = {
         backgroundColor: "#27ae60",
