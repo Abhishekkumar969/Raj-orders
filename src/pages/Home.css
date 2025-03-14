@@ -654,6 +654,10 @@ body {
     width: 60px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     text-align: center;
+    text-decoration: none !important;
+    /* Ensure no underline */
+    color: black !important;
+    /* Force normal text color */
 }
 
 .more-item:hover {
@@ -662,7 +666,12 @@ body {
 
 .more-item span {
     font-size: 14px;
-    font-weight: bold;
+    font-weight: normal;
+    /* Remove bold if needed */
+    text-decoration: none;
+    /* Remove underline */
+    color: black;
+    /* Ensure default text color */
 }
 
 .more-icon {
