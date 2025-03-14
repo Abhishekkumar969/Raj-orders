@@ -94,6 +94,12 @@ const Bill = () => {
 
     const handlePrint = () => window.print();
 
+    const handleFocus = (index, field) => {
+        const updatedItems = [...items];
+        updatedItems[index][field] = ""; // Clear the input field completely
+        setItems(updatedItems);
+    };
+
     return (
         <div style={styles.container}>
             <div style={styles.header}>
@@ -160,9 +166,33 @@ const Bill = () => {
                 <tbody>
                     {items.map((item, index) => (
                         <tr key={index}>
-                            <td><input type="text" value={item.name} onChange={(e) => handleChange(index, "name", e.target.value)} style={styles.input} /></td>
-                            <td><input type="number" value={item.qty} onChange={(e) => handleChange(index, "qty", e.target.value)} style={styles.input} /></td>
-                            <td><input type="number" value={item.price} onChange={(e) => handleChange(index, "price", e.target.value)} style={styles.input} /></td>
+                            <td>
+                                <input
+                                    type="text"
+                                    value={item.name}
+                                    onChange={(e) => handleChange(index, "name", e.target.value)}
+                                    onFocus={() => handleFocus(index, "name")}
+                                    style={styles.input}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    value={item.qty}
+                                    onChange={(e) => handleChange(index, "qty", e.target.value)}
+                                    onFocus={() => handleFocus(index, "qty")}
+                                    style={styles.input}
+                                />
+                            </td>
+                            <td>
+                                <input
+                                    type="number"
+                                    value={item.price}
+                                    onChange={(e) => handleChange(index, "price", e.target.value)}
+                                    onFocus={() => handleFocus(index, "price")}
+                                    style={styles.input}
+                                />
+                            </td>
                             <td style={styles.td}>₹{item.total.toFixed(2)}</td>
                         </tr>
                     ))}

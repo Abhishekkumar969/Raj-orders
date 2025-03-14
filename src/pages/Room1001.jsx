@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { menuItems } from "../components/Menu";
 import { db } from "../firebaseConfig"; // Import Firestore database
 import { collection, addDoc } from "firebase/firestore"; // Import Firestore functions separately
-
 import "./Room.css"; // Ensure you have a CSS file for styling
 
 const Room1001 = () => {
@@ -53,7 +52,8 @@ const Room1001 = () => {
 
             console.log("Order submitted, document ID:", docRef.id); // Debug log after submitting
 
-            alert(`Order from Room ${roomNumber} submitted successfully!`);
+            // alert(`Order from Room ${roomNumber} submitted successfully!`);
+
             setOrders([]);
             localStorage.removeItem("room1001Orders");
         } catch (error) {
@@ -62,12 +62,9 @@ const Room1001 = () => {
         }
     };
 
-
-
-
     return (
         <div className="menu-container">
-            <h2 className="restaurant-title">Raj Mahal Rooms & Banquet Hall</h2>
+            <h2 className="restaurant-title">Raj Mahal Rooms & Banquet Hall: Room 1001</h2>
             <p className="delivery-time">30-35 mins</p>
             <div className="menu-list">
                 {menuItems.map((item) => {

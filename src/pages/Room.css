@@ -216,6 +216,7 @@ body {
     background: linear-gradient(135deg, #ff9800, #e65100);
     color: white;
     border: none;
+    margin-right: 25px;
     padding: 12px 20px;
     font-size: 16px;
     font-weight: bold;
@@ -226,6 +227,6 @@ body {
 }
 
 .submit-order:hover {
-    background: linear-gradient(135deg, #e65100, #bf360c);
+    background: linear-gradient(135deg, #fffb00, #6bbf0c);
     transform: scale(1.05);
 }

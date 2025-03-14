@@ -2,8 +2,12 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Orders from "./components/Orders";
 import Bill from "./pages/Bill";
+import Menu from "./components/Menu"
 import Bookings from "./pages/Bookings";
 import AllOrders from "./pages/AllOrders";
+import Edit from "./pages/Edit";
+import ProfileLink from "./pages/ProfileLink";
+import Inventory from "./pages/Inventory";
 import Room1001 from "./pages/Room1001";
 import Room1002 from "./pages/Room1002";
 import Room1003 from "./pages/Room1003";
@@ -25,8 +29,12 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/orders" element={<Orders />} /> {/* Orders Page */}
         <Route path="/bill" element={<Bill />} />
+        <Route path="/menu" element={<Menu />} />
         <Route path="/bookings" element={<Bookings />} /> {/* Bookings Page */}
         <Route path="/allOrders" element={<AllOrders />} /> {/* Bookings Page */}
+        <Route path="/edit" element={<Edit />} /> {/* edit Page */}
+        <Route path="/profileLink" element={<ProfileLink />} /> {/* ProfileLink Page */}
+        <Route path="/inventory" element={<Inventory />} /> {/* ProfileLink Page */}
         <Route path="/room1001" element={<Room1001 />} /> {/* Bookings Page */}
         <Route path="/room1002" element={<Room1002 />} /> {/* Bookings Page */}
         <Route path="/room1003" element={<Room1003 />} /> {/* Bookings Page */}

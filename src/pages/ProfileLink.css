@@ -1,0 +1,76 @@
+/* Main container for the profile icon and popup */
+
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+
+/* Styling for the profile icon */
+
+.nav-icon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: black;
+}
+
+.nav-icon .material-icons {
+    margin-right: 8px;
+}
+
+
+/* Popup menu animation and positioning */
+
+.popup-menu {
+    position: absolute;
+    top: 50px;
+    /* Adjust as needed */
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transform: scale(0);
+    animation: popupAnimation 0.3s ease forwards;
+}
+
+
+/* Popup item styling */
+
+.popup-item {
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    color: black;
+    background-color: #f1f1f1;
+    border-radius: 6px;
+    width: 100%;
+    text-align: center;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.popup-item:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+
+/* Popup animation */
+
+@keyframes popupAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}

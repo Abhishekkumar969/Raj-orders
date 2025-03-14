@@ -12,7 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-bottom: 70px;
+    padding-bottom: 80px;
 }
 
 .popup {
@@ -321,4 +321,374 @@ body {
         padding: 12px 0;
         /* Adjust padding */
     }
+}
+
+
+/* Offline Orders Popup */
+
+.offline-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.offline-popup-content {
+    background: #fff;
+    width: 90%;
+    max-width: 500px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+
+/* Table Styling */
+
+.offline-popup-table {
+    width: 100%;
+    margin-top: 15px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    /* Ensures equal column distribution */
+}
+
+
+/* Table headers and cells */
+
+.offline-popup-table th,
+.offline-popup-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    /* Centers text */
+    vertical-align: middle;
+    /* Aligns content vertically */
+}
+
+
+/* Ensure inputs take full width of cells */
+
+.offline-popup-table input {
+    width: 80%;
+    /* Adjusts input width to fit inside the table cell */
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+}
+
+
+/* Buttons alignment */
+
+.offline-add-item,
+.offline-save-order,
+.offline-close-popup {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 5px;
+    font-size: 16px;
+    transition: background 0.3s ease-in-out;
+    display: inline-block;
+    min-width: 120px;
+    /* Ensure consistent button width */
+}
+
+.offline-add-item {
+    background: #28a745;
+    color: white;
+}
+
+.offline-save-order {
+    background: #007bff;
+    color: white;
+}
+
+.offline-close-popup {
+    background: #dc3545;
+    color: white;
+}
+
+
+/* Animations */
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.offline-delete-item {
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 8px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.offline-delete-item:hover {
+    background-color: darkred;
+}
+
+.edit-icon {
+    color: #007bff;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.edit-icon:hover {
+    color: #0056b3;
+}
+
+.delete-icon {
+    color: red;
+    cursor: pointer;
+}
+
+.delete-icon:hover {
+    color: darkred;
+}
+
+.popup-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+.popup-table th,
+.popup-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.popup-table input {
+    width: 80%;
+    /* Ensures input fields fit within cells */
+    padding: 5px;
+    border: 1px solid #ccc;
+    text-align: center;
+    font-size: 16px;
+}
+
+.popup-table td:last-child {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.edit-icon,
+.delete-icon {
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.edit-icon:hover,
+.delete-icon:hover {
+    transform: scale(1.2);
+    color: red;
+}
+
+.order-type {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.online {
+    background-color: #d4edda;
+    /* Light Green */
+    color: #155724;
+}
+
+.offline {
+    background-color: #f8d7da;
+    /* Light Red */
+    color: #721c24;
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f7f7f7;
+    color: #fff;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.nav-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #fff;
+    text-decoration: none;
+    padding: 5px;
+}
+
+.bottom-right-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.bottom-right-links .nav-icon {
+    margin-top: 10px;
+    /* Adjust space between the items */
+}
+
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    background: white;
+    padding: 10px 0;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.nav-icon {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.floating-menu {
+    position: fixed;
+    bottom: 60px;
+    right: 20px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.floating-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+.floating-item:hover {
+    background: #f0f0f0;
+}
+
+
+/* More Button */
+
+.more-button {
+    display: flex;
+    flex-direction: column;
+    bottom: 20px;
+    right: 20px;
+    color: white;
+    padding: 12px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease-in-out;
+}
+
+
+/* More Menu Styles */
+
+.more-menu {
+    position: fixed;
+    bottom: 80px;
+    right: 0px;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 1000;
+}
+
+.more-item {
+    display: flex;
+    flex-direction: column;
+    /* ✅ Stack icon & text vertically */
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    /* Adjust spacing between icon and text */
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 100px;
+    transition: background 0.2s ease-in-out;
+    background-color: #fafafa;
+    height: 60px;
+    width: 60px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.more-item:hover {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.342);
+}
+
+.more-item span {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.more-icon {
+    font-size: 24px;
+    color: #555;
+}
+
+.more-icon-close {
+    font-size: 24px;
+    color: #f1329b;
+}
+
+.more-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    /* Adjust spacing */
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    padding: 10px;
+}
+
+.more-toggle span {
+    white-space: nowrap;
+    /* Prevent text from being cut off */
 }

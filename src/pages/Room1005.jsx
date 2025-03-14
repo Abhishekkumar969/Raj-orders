@@ -53,7 +53,7 @@ const Room1005 = () => {
 
             console.log("Order submitted, document ID:", docRef.id); // Debug log after submitting
 
-            alert(`Order from Room ${roomNumber} submitted successfully!`);
+            // alert(`Order from Room ${roomNumber} submitted successfully!`);
             setOrders([]);
             localStorage.removeItem("room1005Orders");
         } catch (error) {
