@@ -22,15 +22,15 @@ body {
     transform: translate(-50%, -50%);
     width: 90%;
     max-width: 600px;
+    height: 80vh;
+    /* Set a fixed height */
     background: white;
     padding: 20px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
     border-radius: 10px;
     z-index: 1000;
-    max-height: 80vh;
-    /* Prevents overflow */
     overflow-y: auto;
-    /* Enables vertical scroll if needed */
+    /* Enables scrolling when content exceeds height */
 }
 
 .popup-content {
@@ -665,7 +665,7 @@ body {
 }
 
 .more-item span {
-    font-size: 14px;
+    font-size: 11px;
     font-weight: normal;
     /* Remove bold if needed */
     text-decoration: none;
@@ -700,4 +700,90 @@ body {
 .more-toggle span {
     white-space: nowrap;
     /* Prevent text from being cut off */
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    text-align: center;
+}
+
+.popup h2 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.popup table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px;
+}
+
+.popup th,
+.popup td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.popup th {
+    background: #f4f4f4;
+    font-weight: bold;
+}
+
+.popup .close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    color: red;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.popup .checkout-btn {
+    display: inline-block;
+    background: #28a745;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.3s ease;
+}
+
+.popup .checkout-btn:hover {
+    background: #218838;
+}
+
+.popup .actions i {
+    cursor: pointer;
+    margin: 0 5px;
+    font-size: 16px;
+}
+
+.popup .actions .edit {
+    color: #007bff;
+}
+
+.popup .actions .delete {
+    color: #dc3545;
+}
+
+@media screen and (max-width: 768px) {
+    .popup {
+        height: auto;
+        /* Adjust for small screens */
+        max-height: 90vh;
+    }
 }

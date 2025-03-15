@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { db } from "../firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
-import { FaTrash } from "react-icons/fa"; // Importing bin icon from react-icons
-import "./Home.css";
+import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { FaTrash, FaPlus, FaMinus, FaTimes } from "react-icons/fa";
+import "./Edit.css";
 
 const allRooms = [
     { id: 1001, type: "Deluxe", image: "/assets/1001.jpg" },
@@ -20,19 +20,42 @@ const allRooms = [
 const EditOrders = () => {
     const [selectedRoom, setSelectedRoom] = useState(null);
     const [orderItems, setOrderItems] = useState([]);
+    const [inventory, setInventory] = useState([]);
+    const [showInventoryPopup, setShowInventoryPopup] = useState(false);
 
-    const handleAddItem = () => {
-        setOrderItems([...orderItems, { name: "", qty: 1, price: 0 }]);
+    useEffect(() => {
+        const inventoryCollection = collection(db, "inventory");
+        const unsubscribe = onSnapshot(inventoryCollection, (snapshot) => {
+            const items = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            setInventory(items);
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const handleAddInventoryItem = (item) => {
+        const existingItemIndex = orderItems.findIndex(orderItem => orderItem.id === item.id);
+        if (existingItemIndex !== -1) {
+            const updatedItems = [...orderItems];
+            updatedItems[existingItemIndex].qty += 1;
+            setOrderItems(updatedItems);
+        } else {
+            setOrderItems([...orderItems, { ...item, qty: 1 }]);
+        }
     };
 
-    const handleChange = (index, field, value) => {
+    const handleIncreaseQty = (index) => {
         const updatedItems = [...orderItems];
-        updatedItems[index][field] = value;
+        updatedItems[index].qty += 1;
         setOrderItems(updatedItems);
     };
 
-    const handleDeleteRow = (index) => {
-        const updatedItems = orderItems.filter((_, i) => i !== index);
+    const handleDecreaseQty = (index) => {
+        const updatedItems = [...orderItems];
+        if (updatedItems[index].qty > 1) {
+            updatedItems[index].qty -= 1;
+        } else {
+            updatedItems.splice(index, 1);
+        }
         setOrderItems(updatedItems);
     };
 
@@ -48,28 +71,19 @@ const EditOrders = () => {
         }
 
         const newOrder = {
-            roomNo: selectedRoom.id.toString(), // Convert room number to string
+            roomNo: selectedRoom.id.toString(),
             items: orderItems,
             timestamp: new Date(),
         };
 
-
         try {
             await addDoc(collection(db, "orders"), newOrder);
-            // alert(`Order saved for Room ${selectedRoom.id} successfully!`);
             setSelectedRoom(null);
             setOrderItems([]);
         } catch (error) {
             console.error("Error saving order:", error);
             alert("Failed to save order. Please try again.");
         }
-    };
-
-    const handleFocus = (index, field) => {
-        // Clear input value on focus
-        const updatedItems = [...orderItems];
-        updatedItems[index][field] = "";
-        setOrderItems(updatedItems);
     };
 
     return (
@@ -96,48 +110,46 @@ const EditOrders = () => {
                                     <th>Item</th>
                                     <th>Qty</th>
                                     <th>Price</th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 {orderItems.map((item, index) => (
                                     <tr key={index}>
+                                        <td>{item.name}</td>
                                         <td>
-                                            <input
-                                                type="text"
-                                                value={item.name}
-                                                onChange={(e) => handleChange(index, "name", e.target.value)}
-                                                onFocus={() => handleFocus(index, "name")}
-                                            />
+                                            <FaMinus className="icon" onClick={() => handleDecreaseQty(index)} />
+                                            {item.qty}
+                                            <FaPlus className="icon" onClick={() => handleIncreaseQty(index)} />
                                         </td>
+                                        <td>{item.price}</td>
                                         <td>
-                                            <input
-                                                type="number"
-                                                value={item.qty}
-                                                onChange={(e) => handleChange(index, "qty", Number(e.target.value))}
-                                                onFocus={() => handleFocus(index, "qty")}
-                                            />
-                                        </td>
-                                        <td>
-                                            <input
-                                                type="number"
-                                                value={item.price}
-                                                onChange={(e) => handleChange(index, "price", Number(e.target.value))}
-                                                onFocus={() => handleFocus(index, "price")}
-                                            />
-                                        </td>
-                                        <td>
-                                            <FaTrash
-                                                className="delete-icon"
-                                                onClick={() => handleDeleteRow(index)}
-                                            />
+                                            <FaTrash className="delete-icon" onClick={() => handleDecreaseQty(index)} />
                                         </td>
                                     </tr>
                                 ))}
                             </tbody>
                         </table>
-                        <button className="offline-add-item" onClick={handleAddItem}>Add Item</button>
-                        <button className="offline-save-order" onClick={handleSaveOrder}>Save Order</button>
+                        <button className="offline-add-item" onClick={() => setShowInventoryPopup(true)}>Inventory</button>
                         <button className="offline-close-popup" onClick={() => setSelectedRoom(null)}>Close</button>
+                        <button className="offline-save-order" onClick={handleSaveOrder}>Save Order</button>
+                    </div>
+                </div>
+            )}
+
+            {showInventoryPopup && (
+                <div className="inventory-popup">
+                    <div className="inventory-popup-content">
+                        <h2>Inventory Items</h2>
+                        <ul>
+                            {inventory.map(item => (
+                                <li key={item.id}>
+                                    {item.name} - {item.quantity} left - ₹{item.price}
+                                    <button onClick={() => handleAddInventoryItem(item)}>Add</button>
+                                </li>
+                            ))}
+                        </ul>
+                        <FaTimes className="close-popup" onClick={() => setShowInventoryPopup(false)} />
                     </div>
                 </div>
             )}

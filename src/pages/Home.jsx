@@ -4,6 +4,7 @@ import { db } from "../firebaseConfig";
 import { doc, updateDoc, deleteDoc, query, where, getDocs, collection, onSnapshot } from "firebase/firestore";
 import "./Home.css";
 import { FaEdit, FaTrash, FaTimes, FaCalendarCheck, FaBoxOpen, FaList, FaPrint, FaBars } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 const notificationSound = "/assets/notification.mp3";
 
@@ -30,6 +31,22 @@ const Home = () => {
 
     const toggleMoreMenu = () => {
         setIsMoreOpen(!isMoreOpen);
+    };
+
+    const menuVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                staggerChildren: 0.1, // Delay each item
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: { opacity: 0, y: 20 },
+        visible: { opacity: 1, y: 0, transition: { duration: 0.1 } },
     };
 
     useEffect(() => {
@@ -183,7 +200,13 @@ const Home = () => {
                 <div className="overlay">
                     <h3 style={{ color: "white" }}>Raj Mahal Rooms & Banquet Hall</h3>
                 </div>
-                <button className={`icon-button ${bellShake ? "shake" : ""}`}>🔔</button>
+                <motion.button
+                    className={`icon-button ${bellShake ? "shake" : ""}`}
+                    animate={{ rotate: bellShake ? [0, 20, -20, 20, -20, 20, -20, 20, -20, 0] : 0 }}
+                    transition={{ duration: 3 }}
+                >
+                    🔔
+                </motion.button>
             </div>
 
             <div className="room-list">
@@ -311,27 +334,42 @@ const Home = () => {
 
             {/* More Menu */}
             {isMoreOpen && (
-                <div className="more-menu">
-                    <Link className="more-item">
-                        <FaCalendarCheck className="more-icon" />
-                        <span>Pre-bookings</span>
-                    </Link>
+                <motion.div
+                    className="more-menu"
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    variants={menuVariants}
+                >
+                    <motion.div variants={itemVariants}>
+                        <Link className="more-item">
+                            <FaCalendarCheck className="more-icon" />
+                            <span>Pre-bookings</span>
+                        </Link>
+                    </motion.div>
 
-                    <Link to="/bill" className="more-item">
-                        <FaPrint className="more-icon" />
-                        <span>Print Bill</span>
-                    </Link>
-                    <Link to="/inventory" className="more-item">
-                        <FaBoxOpen className="more-icon" />
-                        <span>Inventory</span>
-                    </Link>
-                    <Link to="/menu" className="more-item">
-                        <FaList className="more-icon" />
-                        <span>Menu</span>
-                    </Link>
-                </div>
+                    <motion.div variants={itemVariants}>
+                        <Link to="/bill" className="more-item">
+                            <FaPrint className="more-icon" />
+                            <span>Print Bill</span>
+                        </Link>
+                    </motion.div>
+
+                    <motion.div variants={itemVariants}>
+                        <Link to="/inventory" className="more-item">
+                            <FaBoxOpen className="more-icon" />
+                            <span>Inventory</span>
+                        </Link>
+                    </motion.div>
+
+                    <motion.div variants={itemVariants}>
+                        <Link to="/menu" className="more-item">
+                            <FaList className="more-icon" />
+                            <span>Menu</span>
+                        </Link>
+                    </motion.div>
+                </motion.div>
             )}
-
         </div>
     );
 };

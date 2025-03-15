@@ -1,0 +1,188 @@
+/* Inventory Container */
+
+.inventory-container {
+    width: 90%;
+    margin: 20px auto;
+    text-align: center;
+}
+
+
+/* Add Button */
+
+.add-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border-radius: 5px;
+}
+
+.add-btn:hover {
+    background-color: #218838;
+}
+
+
+/* Inventory Table */
+
+.inventory-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.inventory-table th,
+.inventory-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.inventory-table th {
+    background-color: #007bff;
+    color: white;
+}
+
+.inventory-table input {
+    width: 80%;
+    padding: 5px;
+    text-align: center;
+}
+
+
+/* Delete Icon */
+
+.delete-icon {
+    color: red;
+    cursor: pointer;
+}
+
+.delete-icon:hover {
+    color: darkred;
+}
+
+
+/* No Items Message */
+
+.no-items {
+    font-size: 18px;
+    color: gray;
+}
+
+.popup-contentpage {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    max-width: 500px;
+    /* Adjust width for better responsiveness */
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Close Button */
+
+.close-popup {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    color: rgb(255, 0, 0);
+    background-color: #dddddd00;
+}
+
+.close-popup:hover {
+    color: darkred;
+}
+
+
+/* Add Item Button Inside Popup */
+
+.add-item-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.add-item-btn:hover {
+    background-color: #218838;
+}
+
+
+/* Responsive Design */
+
+@media (max-width: 768px) {
+    .popup-content {
+        width: 95%;
+        max-width: 90%;
+    }
+    .inventory-table th,
+    .inventory-table td {
+        padding: 5px;
+        font-size: 14px;
+    }
+    .inventory-table input {
+        width: 90%;
+    }
+    .popup-contentpage {
+        width: 90%;
+        /* Make it responsive */
+        max-width: 400px;
+        /* Set a max width for larger screens */
+        padding: 15px;
+        background: white;
+        border-radius: 10px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .popup-contentpage h2 {
+        font-size: 18px;
+        text-align: center;
+    }
+    .inventory-table {
+        width: 100%;
+        /* Ensure table takes full width */
+    }
+    .inventory-table input {
+        width: 70%;
+        /* Make inputs responsive */
+        padding: 8px;
+        font-size: 14px;
+    }
+    .add-item-btn {
+        width: 100%;
+        padding: 10px;
+        background: green;
+        color: white;
+        font-size: 16px;
+        border: none;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+    .close-popup {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        cursor: pointer;
+        font-size: 18px;
+        color: red;
+    }
+}

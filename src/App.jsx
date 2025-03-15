@@ -33,7 +33,7 @@ function App() {
         <Route path="/bookings" element={<Bookings />} /> {/* Bookings Page */}
         <Route path="/allOrders" element={<AllOrders />} /> {/* Bookings Page */}
         <Route path="/edit" element={<Edit />} /> {/* edit Page */}
-        <Route path="/profileLink" element={<ProfileLink />} /> {/* ProfileLink Page */}
+        <Route path="/profileLink" element={<ProfileLink />} />
         <Route path="/inventory" element={<Inventory />} /> {/* ProfileLink Page */}
         <Route path="/room1001" element={<Room1001 />} /> {/* Bookings Page */}
         <Route path="/room1002" element={<Room1002 />} /> {/* Bookings Page */}
